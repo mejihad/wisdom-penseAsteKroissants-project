@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title layout:title-pattern="$DECORATOR_TITLE :: $CONTENT_TITLE">Welcome to PenseAsteKroissants</title>
+    <link rel="shortcut icon" href="/assets/owl-small.png"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <script src="/libs/jquery.min.js"></script>
+    <script src="/libs/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/libs/css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" href="/assets/main.css"/>
+
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="main" layout:fragment="content">
+                This is the content.
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

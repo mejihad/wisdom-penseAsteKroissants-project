@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html layout:decorator="base">
+<head lang="en">
+    <title>Astekians list</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container">
+            <h2>All astekians</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>firstName</th>
+                        <th>lastName</th>
+                        <th>email</th>
+                        <th>order</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="astekian : ${astekians}">
+                        <td th:text="${astekian.firstName}">Jihad</td>
+                        <td th:text="${astekian.lastName}">Mejdoub</td>
+                        <td th:text="${astekian.email}">jmejdoub@astek.fr</td>
+                        <td th:text="${astekian.order}">1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

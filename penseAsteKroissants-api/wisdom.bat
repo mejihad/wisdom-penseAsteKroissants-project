@@ -1,0 +1,1 @@
+mvn wisdom:run -DwisdomDirectory=../penseAsteKroissants-web/target/wisdom
