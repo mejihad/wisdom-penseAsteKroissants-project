@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html layout:decorator="base">
+<head lang="en">
+    <title>Astekians form</title>
+
+    <script src="/libs/parsley.min.js"></script>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container">
+            <h2>Astekians form</h2>
+            <!-- th:action="${#routes.route('save')}" -->
+            <form id="astekian-form" >
+                <label for="firstName">First Name * :</label>
+                <input type="text" id="firstName" data-parsley-required="true"/>
+
+                <label for="email">Email * :</label>
+                <input type="email" id="email" data-parsley-trigger="change"  />
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $('#astekian-form').parsley();
+    </script>
+</body>
+</html>

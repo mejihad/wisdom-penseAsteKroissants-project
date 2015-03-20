@@ -13,8 +13,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.wisdom-framework:wisdom-api:0.8.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.4.4" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.4.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.fasterxml.jackson.core:jackson-core:2.4.4" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.4.0" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.4.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.4.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.4.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.codehaus.woodstox:stax2-api:3.1.4" level="project" />
@@ -29,6 +29,7 @@
     <orderEntry type="library" name="Maven: org.jongo:jongo:1.1" level="project" />
     <orderEntry type="library" name="Maven: de.undercouch:bson4jackson:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:2.13.0" level="project" />
+    <orderEntry type="module" module-name="penseAsteKroissants-entities" />
     <orderEntry type="library" scope="TEST" name="Maven: org.wisdom-framework:wisdom-test:0.8.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.wisdom-framework:wisdom-ipojo-module:0.8.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.wisdom-framework:wisdom-maven-plugin:0.8.0" level="project" />

@@ -18,7 +18,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.4.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.4.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.codehaus.woodstox:stax2-api:3.1.4" level="project" />
-    <orderEntry type="library" name="Maven: com.google.guava:guava:18.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-io:commons-io:2.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: joda-time:joda-time:2.7" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.validation:validation-api:1.1.0.Final" level="project" />
@@ -31,6 +30,7 @@
     <orderEntry type="library" name="Maven: org.jongo:jongo:1.1" level="project" />
     <orderEntry type="library" name="Maven: de.undercouch:bson4jackson:2.4.0" level="project" />
     <orderEntry type="module" module-name="penseAsteKroissants-api" />
+    <orderEntry type="library" name="Maven: com.google.guava:guava:18.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.wisdom-framework:wisdom-test:0.8.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.wisdom-framework:wisdom-ipojo-module:0.8.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.wisdom-framework:wisdom-maven-plugin:0.8.0" level="project" />

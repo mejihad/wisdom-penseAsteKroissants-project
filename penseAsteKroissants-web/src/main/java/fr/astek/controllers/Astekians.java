@@ -1,11 +1,8 @@
 package fr.astek.controllers;
 
-import com.google.common.collect.Lists;
 import fr.astek.pac.models.Astekian;
-import fr.astek.api.providers.JongoProvider;
-import fr.astek.services.AstekianService;
+import fr.astek.api.services.AstekianCRUDService;
 import org.apache.felix.ipojo.annotations.Requires;
-import org.jongo.MongoCursor;
 import org.wisdom.api.DefaultController;
 import org.wisdom.api.annotations.Controller;
 import org.wisdom.api.annotations.Route;
@@ -13,6 +10,8 @@ import org.wisdom.api.annotations.View;
 import org.wisdom.api.http.HttpMethod;
 import org.wisdom.api.http.Result;
 import org.wisdom.api.templates.Template;
+
+import java.util.List;
 
 /**
  * Created by jmejdoub on 26/02/2015.
@@ -23,15 +22,20 @@ public class Astekians extends DefaultController {
     @View("astekiansList")
     Template astekiansList;
 
-    @Requires
-    private AstekianService astekianService;
+    @View("astekiansForm")
+    Template astekiansForm;
 
     @Requires
-    private JongoProvider jongoProvider;
+    private AstekianCRUDService astekianJongoService;
 
     @Route(method = HttpMethod.GET, uri = "/astekiansList")
     public Result astekiansList() {
-        MongoCursor<Astekian> astekians =astekianService.findAll(jongoProvider.getJongo());
-        return ok(render(astekiansList, "astekians", Lists.newArrayList(astekians.iterator())));
+        List<Astekian> astekians = astekianJongoService.findAll();
+        return ok(render(astekiansList, "astekians", astekians));
+    }
+
+    @Route(method = HttpMethod.GET, uri = "/new")
+    public Result newAstekian() {
+        return ok(render(astekiansForm));
     }
 }
