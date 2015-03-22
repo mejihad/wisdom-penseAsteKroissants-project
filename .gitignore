@@ -16,3 +16,4 @@ log/
 target/
 
 ./chameleon/
+bin/
