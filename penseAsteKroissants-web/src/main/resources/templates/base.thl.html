@@ -11,16 +11,14 @@
 
     <link rel="stylesheet" href="/libs/css/bootstrap.css" media="screen"/>
     <link rel="stylesheet" href="/assets/main.css"/>
+    <link rel="stylesheet" href="/assets/stylesheets/default.css"/>
 
 </head>
 <body>
     <div th:replace="fragments/header :: header"></div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="main" layout:fragment="content">
-                This is the content.
-            </div>
-        </div>
+
+    <div class="container" layout:fragment="content">
+        This is the content.
     </div>
 
     <div th:replace="fragments/footer :: footer"></div>
