@@ -11,19 +11,19 @@ public class Astekian {
 
     @Id
     @ObjectId
-    public String id;
+    protected String id;
 
-    public String firstName;
+    protected String firstName;
 
-    public String lastName;
+    protected String lastName;
 
-    public String email;
+    protected String email;
 
-    public boolean isInMission;
+    protected boolean isInMission;
 
-    public String password;
+    protected String password;
 
-    public long order;
+    protected long order;
 
     public Astekian() {
     }

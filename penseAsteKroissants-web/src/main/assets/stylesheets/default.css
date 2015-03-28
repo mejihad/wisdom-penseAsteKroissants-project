@@ -61,3 +61,12 @@ input.parsley-error, select.parsley-error, textarea.parsley-error {
 .container .text-muted {
     margin: 20px 0;
 }
+
+
+.cap:first-letter {
+    text-transform: uppercase;
+}
+
+.pak-actions {
+    cursor: pointer;
+}

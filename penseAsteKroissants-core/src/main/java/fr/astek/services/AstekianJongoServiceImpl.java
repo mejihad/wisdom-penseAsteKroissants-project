@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import fr.astek.api.providers.JongoProvider;
 import fr.astek.api.services.AstekianCRUDService;
 import fr.astek.pac.models.Astekian;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;
 import org.apache.felix.ipojo.annotations.Provides;
@@ -24,8 +25,6 @@ public class AstekianJongoServiceImpl implements AstekianCRUDService {
     @Requires
     private JongoProvider jongoProvider;
 
-    protected long order;
-
     public List<Astekian> findAll() {
         MongoCollection astekians = jongoProvider.getJongo().getCollection("astekians");
         MongoCursor<Astekian> astekianMongoCursor = astekians.find().as(Astekian.class);
@@ -39,14 +38,18 @@ public class AstekianJongoServiceImpl implements AstekianCRUDService {
 
     public  void remove(Astekian ovni) {
         MongoCollection astekians = jongoProvider.getJongo().getCollection("astekians");
-        astekians.remove(new org.bson.types.ObjectId(ovni.id));
+        long order = ovni.getOrder();
+        astekians.remove(new org.bson.types.ObjectId(ovni.getId()));
+        astekians.update("{order: {$gt: #}}",order).multi().with("{$inc: {order: -1}}");
     }
 
-    public void save(boolean isUpdate) {
+    public void save(Astekian ovni) {
         MongoCollection astekians = jongoProvider.getJongo().getCollection("astekians");
-        if (!isUpdate) {
-            order = astekians.count() + 1;
+        if (StringUtils.isBlank(ovni.getId())) {
+            ovni.setId(null);
+            long order = astekians.count() + 1;
+            ovni.setOrder(order);
         }
-        astekians.save(this);
+        astekians.save(ovni);
     }
 }

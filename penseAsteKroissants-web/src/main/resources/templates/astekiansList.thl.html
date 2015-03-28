@@ -2,30 +2,55 @@
 <html layout:decorator="base">
 <head lang="en">
     <title>Astekians list</title>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        function del(urlToDelete) {
+            $.ajax({
+                url: urlToDelete,
+                type: 'DELETE',
+                success: function(results) {
+                    // Refresh the page
+                    location.reload();
+                }
+            });
+        }
+        /*]]>*/
+    </script>
 </head>
 <body>
     <div layout:fragment="content">
+
         <div class="container">
             <h2>All astekians</h2>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>firstName</th>
-                        <th>lastName</th>
-                        <th>email</th>
-                        <th>order</th>
-                    </tr>
+            <div class="row" id="userList">
+                <table class="table-responsive table-striped table-hover no-margin">
+                    <thead>
+                <tr>
+                    <th class="col-xs-1"></th>
+                    <th class="col-xs-2">first Name</th>
+                    <th class="col-xs-2">last Name</th>
+                    <th class="col-xs-2">email</th>
+                    <th class="col-xs-2">order</th>
+                    <th class="col-xs-1"></th>
+                </tr>
                 </thead>
-                <tbody>
-                    <tr th:each="astekian : ${astekians}">
-                        <td th:text="${astekian.firstName}">Jihad</td>
-                        <td th:text="${astekian.lastName}">Mejdoub</td>
-                        <td th:text="${astekian.email}">jmejdoub@astek.fr</td>
-                        <td th:text="${astekian.order}">1</td>
-                    </tr>
-                </tbody>
-            </table>
+                    <tbody>
+                        <tr th:each="astekian : ${astekians}">
+                            <td class="col-xs-1"><img title="img" src="/assets/images/astekian.png" style="min-height:60px;height:60px;" class="img-thumbnail img-responsive img-circle" /></td>
+                            <td class="col-xs-2 cap" th:text="${astekian.firstName}">Jihad</td>
+                            <td class="col-xs-2 cap" th:text="${astekian.lastName}">Mejdoub</td>
+                            <td class="col-xs-2" th:text="${astekian.email}">jmejdoub@astek.fr</td>
+                            <td class="col-xs-2" th:text="${astekian.order}">1</td>
+                            <td class="col-xs-1 pak-actions">
+                                <a th:href="${#routes.route('astekianDetail','id',astekian.id)}"><i class="glyphicon glyphicon-pencil"></i></a>
+                                <a th:attr="onclick='javascript:del(\'' + ${#routes.route('delete','id',astekian.id)} + '\');'"><i class="glyphicon glyphicon-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+
 </body>
 </html>

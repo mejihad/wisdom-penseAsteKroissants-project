@@ -36,7 +36,7 @@ public class WelcomeController extends DefaultController {
     /**
      * Injects a template named 'welcome'.
      */
-    @View("welcome")
+    @View("welcomeWis")
     Template welcome;
 
     /**
@@ -45,7 +45,7 @@ public class WelcomeController extends DefaultController {
      *
      * @return the welcome page
      */
-    @Route(method = HttpMethod.GET, uri = "/")
+    @Route(method = HttpMethod.GET, uri = "/wel")
     public Result welcome() {
         return ok(render(welcome, "welcome", "Welcome to Wisdom Framework!"));
     }

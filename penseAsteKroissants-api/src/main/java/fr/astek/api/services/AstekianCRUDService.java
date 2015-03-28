@@ -14,6 +14,6 @@ public interface AstekianCRUDService {
 
     public  void remove(Astekian ovni);
 
-    public void save(boolean isUpdate);
+    public void save(Astekian ovni);
 }
 

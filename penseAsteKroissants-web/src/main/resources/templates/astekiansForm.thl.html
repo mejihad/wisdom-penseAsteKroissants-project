@@ -7,22 +7,33 @@
 </head>
 <body>
     <div layout:fragment="content">
-        <div class="jumbotron">
-            <h2>Astekians form</h2>
-            <!-- th:action="${#routes.route('save')}" -->
-            <form id="astekian-form">
-                <label for="firstName">First Name * :</label>
-                <input type="text" id="firstName" data-parsley-required="true" />
-
-                <label for="email">Email * :</label>
-                <input type="email" id="email" data-parsley-trigger="change" data-parsley-required="true" />
-
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
-            </form>
-            <script type="text/javascript">
-                $('#astekian-form').parsley();
-            </script>
-        </div>
+        <h2>Astekians form</h2>
+        <hr/>
+        <!-- th:action="${#routes.route('save')}" -->
+        <form id="astekian-form" method="post" role="form" class="form-horizontal" th:action="${#routes.route('save')}" >
+            <input type="hidden" name="id" th:value="${astekian} ? ${astekian.id}" />
+            <input type="hidden" name="order" th:value="${astekian} ? ${astekian.order}" />
+            <div class="form-group">
+                <label class="col-sm-2" for="inputFirstName">First Name * :</label>
+                <div class="col-sm-3"><input class="form-control" id="inputFirstName" name="firstName" data-parsley-required="true" th:value="${astekian} ? ${astekian.firstName}" /></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2" for="inputLastName">Last Name * :</label>
+                <div class="col-sm-3"><input class="form-control" id="inputLastName" name="lastName" type="text" data-parsley-required="true" th:value="${astekian} ? ${astekian.lastName}" /></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2" for="inputEmail">Email * :</label>
+                <div class="col-sm-3"><input class="form-control" id="inputEmail" name="email" type="email" data-parsley-trigger="change" data-parsley-required="true" th:value="${astekian} ? ${astekian.email}" /></div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-5">
+                    <button type="submit" class="btn btn-info pull-right">Save</button>
+                </div>
+            </div>
+        </form>
+        <script type="text/javascript">
+            $('#astekian-form').parsley();
+        </script>
     </div>
 </body>
 </html>
