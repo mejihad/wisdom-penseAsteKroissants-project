@@ -1,19 +1,19 @@
 package fr.astek.api.services;
 
-import fr.astek.pac.models.Astekian;
+import fr.astek.api.utils.AbstractEntity;
 import java.util.List;
 
 /**
  * Created by jmejdoub on 20/03/2015.
  */
-public interface AstekianCRUDService {
+public interface AstekianCRUDService<T extends AbstractEntity> {
 
-    public List<Astekian> findAll();
+    public List<T> findAll();
 
-    public  Astekian findById(String id);
+    public T findById(String id);
 
-    public  void remove(Astekian ovni);
+    public void remove(T entity);
 
-    public void save(Astekian ovni);
+    public void save(T entity);
 }
 

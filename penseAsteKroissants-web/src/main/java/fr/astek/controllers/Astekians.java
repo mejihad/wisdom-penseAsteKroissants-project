@@ -47,7 +47,7 @@ public class Astekians extends DefaultController {
 
     @Route(method = HttpMethod.GET, uri = "/detail/{id}")
     public Result astekianDetail(@Parameter("id") String id) {
-        final Astekian astekian = astekianJongoService.findById(id);
+        final Astekian astekian = (Astekian) astekianJongoService.findById(id);
         if (astekian == null) {
             return notFound(String.format("Astekian id %s does not exist !", id));
         }
@@ -62,7 +62,7 @@ public class Astekians extends DefaultController {
 
     @Route(method = HttpMethod.DELETE, uri = "/delete/{id}")
     public Result delete(@Parameter("id") String id) {
-        final Astekian astekian = astekianJongoService.findById(id);
+        final Astekian astekian = (Astekian) astekianJongoService.findById(id);
         if (astekian == null) {
             return notFound(String.format("Astekian id %s does not exist !", id));
         }

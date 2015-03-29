@@ -20,7 +20,7 @@ import java.util.List;
 @Component
 @Provides
 @Instantiate
-public class AstekianJongoServiceImpl implements AstekianCRUDService {
+public class AstekianJongoServiceImpl implements AstekianCRUDService<Astekian> {
 
     @Requires
     private JongoProvider jongoProvider;

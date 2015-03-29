@@ -37,6 +37,7 @@ public class JongoProvider {
         try {
             mongo = new MongoClient(host,port);
         } catch (UnknownHostException e) {
+            logger.error("Unable to create Mongo instance.", e);
             throw new RuntimeException("Unable to create Mongo instance.", e);
         }
         DB db = mongo.getDB("penseAsteKroissants");

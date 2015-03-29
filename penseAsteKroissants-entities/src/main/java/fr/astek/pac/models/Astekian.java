@@ -3,15 +3,16 @@
  */
 package fr.astek.pac.models;
 
+
+import fr.astek.api.utils.AbstractEntity;
 import org.jongo.marshall.jackson.oid.Id;
 import org.jongo.marshall.jackson.oid.ObjectId;
 
-
-public class Astekian {
+public class Astekian extends AbstractEntity {
 
     @Id
     @ObjectId
-    protected String id;
+    protected String id ;
 
     protected String firstName;
 
@@ -45,10 +46,12 @@ public class Astekian {
         this.order = order;
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public void setId(String id) {
         this.id = id;
     }

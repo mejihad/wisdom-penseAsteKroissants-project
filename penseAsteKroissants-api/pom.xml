@@ -91,12 +91,6 @@
             <version>2.13.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>fr.astek</groupId>
-            <artifactId>penseAsteKroissants-entities</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.wisdom-framework</groupId>
