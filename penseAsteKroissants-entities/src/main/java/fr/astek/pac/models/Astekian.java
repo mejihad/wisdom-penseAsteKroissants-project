@@ -86,13 +86,11 @@ public class Astekian extends AbstractEntity {
         this.email = email;
     }
 
-    public boolean isInMission() {
-
+    public boolean getIsInMission() {
         return isInMission;
     }
 
-    public void setInMission(boolean isInMission) {
-
+    public void setIsInMission(boolean isInMission) {
         this.isInMission = isInMission;
     }
 

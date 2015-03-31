@@ -1,7 +1,7 @@
 package fr.astek.services;
 
 import com.google.common.collect.Lists;
-import fr.astek.api.providers.JongoProvider;
+import fr.astek.providers.JongoProvider;
 import fr.astek.api.services.AstekianCRUDService;
 import fr.astek.pac.models.Astekian;
 import org.apache.commons.lang3.StringUtils;

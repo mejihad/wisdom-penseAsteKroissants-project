@@ -1,0 +1,28 @@
+[{
+        "firstName" : "Claire",
+        "lastName" : "Jobard",
+        "email" : "cjobard@astek.fr",
+        "order" : 1,
+        "isInMission" : false
+},
+{
+        "firstName" : "Cédric",
+        "lastName" : "Capelle",
+        "email" : "ccapelle@astek.fr",
+        "order" : 2,
+        "isInMission" : false
+},
+{
+        "firstName" : "Jihad",
+        "lastName" : "Mejdoub",
+        "email" : "jmejdoub@astek.fr",
+        "order" : 3,
+        "isInMission" : false
+},
+{
+        "firstName" : "Frédéric",
+        "lastName" : "Geisler",
+        "email" : "fgeisler@astek.fr",
+        "order" : 4,
+        "isInMission" : false
+}]
