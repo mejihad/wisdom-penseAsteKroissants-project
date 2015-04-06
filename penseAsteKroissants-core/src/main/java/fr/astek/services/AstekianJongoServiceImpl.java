@@ -2,7 +2,7 @@ package fr.astek.services;
 
 import com.google.common.collect.Lists;
 import fr.astek.providers.JongoProvider;
-import fr.astek.api.services.AstekianCRUDService;
+import fr.astek.api.services.PaKCRUDService;
 import fr.astek.pac.models.Astekian;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.ipojo.annotations.Component;
@@ -20,7 +20,7 @@ import java.util.List;
 @Component
 @Provides
 @Instantiate
-public class AstekianJongoServiceImpl implements AstekianCRUDService<Astekian> {
+public class AstekianJongoServiceImpl implements PaKCRUDService<Astekian> {
 
     @Requires
     private JongoProvider jongoProvider;

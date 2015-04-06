@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by jmejdoub on 20/03/2015.
  */
-public interface AstekianCRUDService<T extends AbstractEntity> {
+public interface PaKCRUDService<T extends AbstractEntity> {
 
     public List<T> findAll();
 

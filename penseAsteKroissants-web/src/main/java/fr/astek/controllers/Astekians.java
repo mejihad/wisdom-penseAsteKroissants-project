@@ -1,7 +1,7 @@
 package fr.astek.controllers;
 
 import fr.astek.pac.models.Astekian;
-import fr.astek.api.services.AstekianCRUDService;
+import fr.astek.api.services.PaKCRUDService;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.wisdom.api.DefaultController;
 import org.wisdom.api.annotations.*;
@@ -27,7 +27,7 @@ public class Astekians extends DefaultController {
     Template welcome;
 
     @Requires
-    private AstekianCRUDService astekianJongoService;
+    private PaKCRUDService astekianJongoService;
 
     @Route(method = HttpMethod.GET, uri = "/")
     public Result welcome() {
