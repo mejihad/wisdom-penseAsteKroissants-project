@@ -23,16 +23,8 @@ public class Astekians extends DefaultController {
     @View("astekiansForm")
     Template astekiansForm;
 
-    @View("welcome")
-    Template welcome;
-
     @Requires
     private PaKCRUDService astekianJongoService;
-
-    @Route(method = HttpMethod.GET, uri = "/")
-    public Result welcome() {
-        return ok(render(welcome, "welcome", "Welcome to penseAsteKroissants!"));
-    }
 
     @Route(method = HttpMethod.GET, uri = "/astekians")
     public Result astekiansList() {
