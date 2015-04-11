@@ -1,4 +1,4 @@
-package fr.astek.services;
+package fr.astek.services.impl;
 
 import com.google.common.collect.Lists;
 import fr.astek.providers.JongoProvider;

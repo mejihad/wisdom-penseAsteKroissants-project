@@ -30,20 +30,30 @@
 <body>
 <div layout:fragment="content">
     <h1 th:text="${welcome}">Welcome!</h1>
-
+    <div class="jumbotron text-center">
+        <h2>It's your turn, buddy!</h2>
+        <p>if you forget we will f...</p>
+    </div>
     <div class="col-md-12 text-center"><h3>Upcoming events</h3></div>
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-12">
         <div class="carousel slide" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel">
             <div class="carousel-inner">
 
-                <div th:each="upcomingEvent,count : ${upcomingEvents}" class="item" th:classappend="${count.index} == 1? 'active'">
-                    <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="/assets/images/photoNonDispo.jpg" class="img-responsive"/></a></div>
+                <div th:each="upcomingEvent,count : ${upcomingEvents}" class="item" th:classappend="${count.index} == 0? 'active'">
+                    <div class="col-sm-3 col-xs-8 text-center">
+                        <a href="#"><img src="/assets/images/photoNonDispo.jpg" class="img-responsive"/></a>
+                        <div class="caption">
+                            <span th:text="${count.index+1}" class="badge"></span>
+                            <p th:text="${upcomingEvent.organizer.firstName}+' '+${upcomingEvent.organizer.lastName}"></p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
             <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
         </div>
     </div>
+
 </div>
 </body>
 </html>

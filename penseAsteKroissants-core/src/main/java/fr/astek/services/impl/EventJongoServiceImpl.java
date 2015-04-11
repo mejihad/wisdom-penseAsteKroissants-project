@@ -1,7 +1,8 @@
-package fr.astek.services;
+package fr.astek.services.impl;
 
 import com.google.common.collect.Lists;
 import fr.astek.api.services.PaKCRUDService;
+import fr.astek.pac.models.Event;
 import fr.astek.pac.models.UpcomingEvent;
 import fr.astek.providers.JongoProvider;
 import org.apache.felix.ipojo.annotations.Component;
@@ -19,30 +20,32 @@ import java.util.List;
 @Component
 @Provides
 @Instantiate
-public class EventJongoServiceImpl implements PaKCRUDService<UpcomingEvent> {
+public class EventJongoServiceImpl implements PaKCRUDService<Event> {
 
     @Requires
     private JongoProvider jongoProvider;
 
     @Override
-    public List<UpcomingEvent> findAll() {
-        MongoCollection upcomingEvents = jongoProvider.getJongo().getCollection("upcomingEvents");
-        MongoCursor<UpcomingEvent> upcomingEventsMongoCursor = upcomingEvents.find().as(UpcomingEvent.class);
-        return Lists.newArrayList(upcomingEventsMongoCursor.iterator());
+    public List<Event> findAll() {
+        MongoCollection events = jongoProvider.getJongo().getCollection("events");
+        MongoCursor<Event> eventsMongoCursor = events.find().as(Event.class);
+        return Lists.newArrayList(eventsMongoCursor.iterator());
     }
 
     @Override
-    public UpcomingEvent findById(String id) {
+    public Event findById(String id) {
         return null;
     }
 
     @Override
-    public void remove(UpcomingEvent entity) {
+    public void remove(Event evt) {
 
     }
 
     @Override
-    public void save(UpcomingEvent entity) {
-
+    public void save(Event evt) {
+        MongoCollection events = jongoProvider.getJongo().getCollection("events");
+        events.save(evt);
     }
+
 }

@@ -1,9 +1,10 @@
-package fr.astek.services;
+package fr.astek.services.impl;
 
 import com.google.common.collect.Lists;
-import fr.astek.api.services.PaKCRUDService;
+import fr.astek.api.utils.AbstractEntity;
 import fr.astek.pac.models.UpcomingEvent;
 import fr.astek.providers.JongoProvider;
+import fr.astek.services.UpcomingEventService;
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;
 import org.apache.felix.ipojo.annotations.Provides;
@@ -19,7 +20,7 @@ import java.util.List;
 @Component
 @Provides
 @Instantiate
-public class UpcomingEventJongoServiceImpl implements PaKCRUDService<UpcomingEvent> {
+public class UpcomingEventJongoServiceImpl implements UpcomingEventService<UpcomingEvent> {
 
     @Requires
     private JongoProvider jongoProvider;
@@ -34,6 +35,12 @@ public class UpcomingEventJongoServiceImpl implements PaKCRUDService<UpcomingEve
     @Override
     public UpcomingEvent findById(String id) {
         return null;
+    }
+
+    @Override
+    public UpcomingEvent findFirst() {
+        MongoCollection upcomingEvents = jongoProvider.getJongo().getCollection("upcomingEvents");
+        return upcomingEvents.findOne().as(UpcomingEvent.class);
     }
 
     @Override

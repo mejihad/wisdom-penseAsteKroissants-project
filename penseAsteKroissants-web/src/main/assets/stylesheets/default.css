@@ -79,9 +79,14 @@ input.parsley-error, select.parsley-error, textarea.parsley-error {
     border-width:0;
 }
 
-
-.carousel-control 			 { width:  4%; }
-.carousel-control.left,.carousel-control.right {margin-left:15px;background-image:none;}
+/* Carousel  */
+.carousel-control {
+    width:  4%;
+}
+.carousel-control.left,.carousel-control.right {
+    margin-left:15px;
+    background-image:none;
+}
 @media (max-width: 767px) {
     .carousel-inner .active.left { left: -100%; }
     .carousel-inner .next        { left:  100%; }
@@ -102,4 +107,10 @@ input.parsley-error, select.parsley-error, textarea.parsley-error {
     .carousel-inner .active.left { left: -25%; }
     .carousel-inner .next        { left:  25%; }
     .carousel-inner .prev		 { left: -25%; }
+}
+
+.img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    display: inline;
+    height: auto;
+    max-width: 100%;
 }

@@ -8,12 +8,12 @@ import java.util.List;
  */
 public interface PaKCRUDService<T extends AbstractEntity> {
 
-    public List<T> findAll();
+    List<T> findAll();
 
-    public T findById(String id);
+    T findById(String id);
 
-    public void remove(T entity);
+    void remove(T entity);
 
-    public void save(T entity);
+    void save(T entity);
 }
 
