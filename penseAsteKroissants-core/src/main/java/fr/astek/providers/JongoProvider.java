@@ -8,6 +8,7 @@ import fr.astek.pac.dtos.Organizer;
 import fr.astek.pac.models.Astekian;
 import fr.astek.pac.models.Event;
 import fr.astek.pac.models.UpcomingEvent;
+import fr.astek.services.impl.EventsManager;
 import org.apache.commons.lang3.*;
 import org.apache.felix.ipojo.annotations.*;
 import org.apache.felix.ipojo.annotations.Validate;
@@ -35,6 +36,8 @@ public class JongoProvider {
     final static Logger logger = LoggerFactory.getLogger(JongoProvider.class);
     @Requires
     ApplicationConfiguration configuration;
+    @Requires
+    EventsManager eventsManager;
 
     private MongoClient mongo;
     private Jongo jongo;
@@ -71,44 +74,12 @@ public class JongoProvider {
                 throw new RuntimeException("Error occured while reading astekians.json file", e);
             }
         }
-        /* if (!db.collectionExists("events")) {
-            db.createCollection("events",null);
-        }*/
+
        if (!db.collectionExists("upcomingEvents")) {
-            BasicDBObject options = new BasicDBObject("capped", true);
-            options.append("size", 4096);
-            options.append("max", upEvtSize);
-            db.createCollection("upcomingEvents", options);
-            //Init capped collection to manage upcoming events
-            MongoCollection upcomingEvents = jongo.getCollection("upcomingEvents");
-            //Init users list to populate capped collection
-           List<Astekian> astekiansList = Lists.newArrayList(jongo.getCollection("astekians").find().sort("{order: 1}").as(Astekian.class).iterator());
-           MongoCollection events = jongo.getCollection("events");
-           Event currentEvent = events.findOne("{isActive:#}", true).as(Event.class);
-           List<Astekian> subList = new ArrayList<Astekian>();
-           if(currentEvent != null) {
-               final String currentOrganizerId = currentEvent.getOrganizer().getAstekianId();
-               Optional<Astekian> opAstekian = astekiansList
-                       .stream()
-                       .filter(a -> StringUtils.equals(a.getId(),currentOrganizerId))
-                       .findFirst();
-               int indexOfCurrOrg = astekiansList.indexOf(opAstekian.get());
-               subList = astekiansList.subList(indexOfCurrOrg, astekiansList.size());
-           }
-           // Build list of organizers
-           List<Astekian> organizersList = new ArrayList<Astekian>(subList);
-           while (organizersList.size() < upEvtSize){
-               organizersList.addAll(astekiansList);
-           }
-           for(Astekian organizer : organizersList.subList(0,upEvtSize)){
-               UpcomingEvent upcomingEvent = new UpcomingEvent();
-               Organizer org = new Organizer(organizer.getId(),organizer.getFirstName(),organizer.getLastName(),null);
-               upcomingEvent.setOrganizer(org);
-               upcomingEvents.save(upcomingEvent);
-           }
+           eventsManager.initUpcomingEvents(jongo, upEvtSize);
         }
 
-
+        eventsManager.createEvent(jongo);
     }
 
     public Jongo getJongo() {
