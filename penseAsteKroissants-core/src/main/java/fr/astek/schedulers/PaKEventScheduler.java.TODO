@@ -1,0 +1,44 @@
+package fr.astek.schedulers;
+
+
+import fr.astek.schedulers.jobs.EventJob;
+import org.apache.felix.ipojo.annotations.Component;
+import org.apache.felix.ipojo.annotations.Instantiate;
+import org.apache.felix.ipojo.annotations.Validate;
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Created by jmejdoub on 16/04/2015.
+ */
+
+
+@Component
+@Instantiate
+public class PaKEventScheduler{
+
+    final static Logger logger = LoggerFactory.getLogger(PaKEventScheduler.class);
+
+    @Validate
+    protected void scheduleStart() {
+        try {
+            JobDetail job = JobBuilder.newJob(EventJob.class)
+                    .withIdentity("testJob")
+                    .build();
+
+            CronTrigger cronTrigger = TriggerBuilder.newTrigger()
+                    .withIdentity("crontrigger", "crontriggergroup1")
+                    .withSchedule(CronScheduleBuilder.cronSchedule("10 * * * * ?"))
+                    .build();
+
+            SchedulerFactory schFactory = new StdSchedulerFactory();
+            Scheduler sch = schFactory.getScheduler();
+            sch.start();
+            sch.scheduleJob(job, cronTrigger);
+        } catch (SchedulerException e) {
+            logger.error("Scheduler error !!", e);
+        }
+    }
+}
