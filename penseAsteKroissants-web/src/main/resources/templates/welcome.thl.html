@@ -32,6 +32,9 @@
     <h1 th:text="${welcome}">Welcome!</h1>
     <div class="jumbotron text-center">
         <h2>It's your turn, buddy!</h2>
+        <p th:text="${currentEvent.organizer.firstName}+' '+${currentEvent.organizer.lastName}"></p>
+        <a href="#"><img src="/assets/images/photoNonDispo.jpg" class="img-responsive"/></a>
+        <p th:text="${currentEvent.dateStr}"></p>
         <p>if you forget we will f...</p>
     </div>
     <div class="col-md-12 text-center"><h3>Upcoming events</h3></div>

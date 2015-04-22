@@ -1,9 +1,9 @@
 package fr.astek.controllers;
 
-import fr.astek.api.services.PaKCRUDService;
 import fr.astek.pac.models.Event;
 import fr.astek.pac.models.UpcomingEvent;
 import fr.astek.services.UpcomingEventService;
+import fr.astek.services.impl.EventsManager;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.wisdom.api.DefaultController;
 import org.wisdom.api.annotations.Controller;
@@ -16,8 +16,7 @@ import org.wisdom.api.scheduler.Scheduled;
 import org.wisdom.api.templates.Template;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.temporal.TemporalAdjusters;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -33,23 +32,24 @@ public class Events extends DefaultController  implements Scheduled {
     @Requires(from = "fr.astek.services.impl.UpcomingEventJongoServiceImpl-0")
     private UpcomingEventService upComingEventJongoService;
 
+    @Requires
+    EventsManager eventsManager;
+
     @Requires(from = "fr.astek.services.impl.EventJongoServiceImpl-0")
-    private PaKCRUDService eventJongoService;
+    private UpcomingEventService eventJongoService;
 
     @Route(method = HttpMethod.GET, uri = "/")
     public Result welcome() {
         List<UpcomingEvent> upcomingEvents = upComingEventJongoService.findAll();
-        return ok(render(welcome, "welcome", "Welcome to PenseAsteKroissants!", "upcomingEvents", upcomingEvents));
+        Event currentEvent = (Event) eventJongoService.findFirst();
+        return ok(render(welcome, "welcome", "Welcome to PenseAsteKroissants!", "upcomingEvents", upcomingEvents, "currentEvent", currentEvent));
     }
 
-    @Every("4h")
+    @Every("1h")
     public void createNewEvent() {
-        UpcomingEvent upcomingEvt = upComingEventJongoService.findFirst();
-        Event event = new Event();
-        event.setOrganizer(upcomingEvt.getOrganizer());
-        event.setIsActive(true);
-        LocalDate date = LocalDate.now();
-        event.setDate(date.with(TemporalAdjusters.next(DayOfWeek.FRIDAY)));
-        eventJongoService.save(event);
+        LocalDateTime now = LocalDateTime.now();
+        if(DayOfWeek.MONDAY.equals(now.getDayOfWeek()) && now.getHour() >= 9){
+                eventsManager.createEvent();
+        }
     }
 }

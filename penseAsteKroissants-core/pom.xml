@@ -30,6 +30,13 @@
 
     <packaging>wisdom</packaging>
 
+    <properties>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.testSource>1.8</maven.compiler.testSource>
+        <maven.compiler.testTarget>1.8</maven.compiler.testTarget>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.wisdom-framework</groupId>
@@ -93,6 +100,37 @@
             <artifactId>jongo</artifactId>
             <version>1.1</version>
         </dependency>
+
+        <!--dependency>
+            <groupId>org.apache.servicemix.bundles</groupId>
+            <artifactId>org.apache.servicemix.bundles.quartz</artifactId>
+            <version>2.2.1_1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.novemberain</groupId>
+            <artifactId>quartz-mongodb</artifactId>
+            <version>1.9.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.servicemix.bundles</groupId>
+            <artifactId>org.apache.servicemix.bundles.c3p0</artifactId>
+            <version>0.9.1.2_1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.fabric3.api</groupId>
+            <artifactId>commonj</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc</artifactId>
+            <version>10.2.0.3.0</version>
+        </dependency-->
+
 
         <!--dependency>
             <groupId>org.thymeleaf.extras</groupId>
@@ -200,14 +238,6 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
@@ -216,6 +246,10 @@
             <id>oss-snapshot</id>
             <name>oss-snapshot</name>
             <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>clojars.org</id>
+            <url>http://clojars.org/repo</url>
         </repository>
     </repositories>
     <pluginRepositories>

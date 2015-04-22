@@ -23,7 +23,7 @@ public class Astekians extends DefaultController {
     @View("astekiansForm")
     Template astekiansForm;
 
-    @Requires
+    @Requires(from = "fr.astek.services.impl.AstekianJongoServiceImpl-0")
     private PaKCRUDService astekianJongoService;
 
     @Route(method = HttpMethod.GET, uri = "/astekians")

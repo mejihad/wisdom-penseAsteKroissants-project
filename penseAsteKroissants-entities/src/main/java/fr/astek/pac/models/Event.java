@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import fr.astek.pac.dtos.Organizer;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Created by jmejdoub on 04/04/2015.
@@ -42,5 +43,10 @@ public class Event extends UpcomingEvent{
 
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public String getDateStr() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return date.format(formatter);
     }
 }

@@ -5,6 +5,7 @@ import fr.astek.api.services.PaKCRUDService;
 import fr.astek.pac.models.Event;
 import fr.astek.pac.models.UpcomingEvent;
 import fr.astek.providers.JongoProvider;
+import fr.astek.services.UpcomingEventService;
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;
 import org.apache.felix.ipojo.annotations.Provides;
@@ -20,7 +21,7 @@ import java.util.List;
 @Component
 @Provides
 @Instantiate
-public class EventJongoServiceImpl implements PaKCRUDService<Event> {
+public class EventJongoServiceImpl implements UpcomingEventService<Event> {
 
     @Requires
     private JongoProvider jongoProvider;
@@ -48,4 +49,10 @@ public class EventJongoServiceImpl implements PaKCRUDService<Event> {
         events.save(evt);
     }
 
+    @Override
+    public Event findFirst() {
+        MongoCollection events = jongoProvider.getJongo().getCollection("events");
+        Event currentEvent = events.findOne("{isActive:#}", true).as(Event.class);
+        return currentEvent;
+    }
 }
