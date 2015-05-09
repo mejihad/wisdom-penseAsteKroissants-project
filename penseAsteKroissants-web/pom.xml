@@ -177,6 +177,20 @@
                 </configuration>
             </plugin>
         </plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>${project.basedir}</directory>
+				<includes>
+					<include>pak-docker/*</include>
+					<include>docker-compose.yml</include>
+				</includes>
+				<targetPath>${project.build.directory}/wisdom</targetPath>
+			</resource>
+		</resources>
     </build>
 
     <repositories>

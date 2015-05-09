@@ -1,0 +1,23 @@
+web:
+
+  build: ./pak-docker
+
+  ports:
+   - "9000:9000"
+
+  volumes:
+   - ./logs:/wisdom/penseAsteKroissants/logs
+   - ./application:/wisdom/penseAsteKroissants/application
+
+  links:
+   - mongodb
+
+mongodb:
+
+  image: mongo:2.6.9
+
+  ports:
+   - "27017:27017"
+
+  volumes:
+   - ./data/db:/data/db
