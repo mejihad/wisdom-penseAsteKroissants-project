@@ -24,47 +24,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>fr.astek.penseAsteKroissants</groupId>
+        <artifactId>wisdom-penseAsteKroissants-project</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <groupId>fr.astek</groupId>
     <artifactId>penseAsteKroissants-core</artifactId>
-    <version>1.0-SNAPSHOT</version>
 
     <packaging>wisdom</packaging>
 
-    <properties>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.testSource>1.8</maven.compiler.testSource>
-        <maven.compiler.testTarget>1.8</maven.compiler.testTarget>
-    </properties>
-
     <dependencies>
-        <dependency>
-            <groupId>org.wisdom-framework</groupId>
-            <artifactId>wisdom-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.apache.felix.ipojo.annotations</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>bootstrap</artifactId>
-            <version>3.1.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>jquery</artifactId>
-            <version>2.1.0-2</version>
-        </dependency>
-
         <dependency>
             <groupId>fr.astek</groupId>
             <artifactId>penseAsteKroissants-entities</artifactId>
@@ -98,7 +69,17 @@
         <dependency>
             <groupId>org.jongo</groupId>
             <artifactId>jongo</artifactId>
-            <version>1.1</version>
+            <version>1.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!--dependency>
@@ -168,95 +149,5 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Additional applications -->
-        <dependency>
-            <groupId>org.wisdom-framework</groupId>
-            <artifactId>wisdom-monitor</artifactId>
-            <version>0.8.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.wisdom-framework</groupId>
-            <artifactId>documentation</artifactId>
-            <version>0.8.0</version>
-        </dependency>
     </dependencies>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <!-- Define all the versions of the dependencies provided by Wisdom -->
-                <groupId>org.wisdom-framework</groupId>
-                <artifactId>wisdom-bom</artifactId>
-                <version>0.8.0</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.wisdom-framework</groupId>
-                <artifactId>wisdom-maven-plugin</artifactId>
-                <version>0.8.0</version>
-                <extensions>true</extensions>
-                <!--configuration>
-                    <libraries>
-                        <includes>
-                            <include>:thymeleaf-extras-java8time</include>
-                        </includes>
-                        <excludes>
-                            <exclude>:javassist</exclude>
-                            <exclude>:ognl</exclude>
-                            <exclude>org.thymeleaf:thymeleaf:jar:2.1.3.RELEASE</exclude>
-                            <exclude>:unbescape</exclude>
-                        </excludes>
-                    </libraries>
-                </configuration-->
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.18</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                        <configuration>
-                            <properties>
-                                <property>
-                                    <name>listener</name>
-                                    <value>org.wisdom.test.WisdomRunListener</value>
-                                </property>
-                            </properties>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-        </plugins>
-    </build>
-
-    <repositories>
-        <repository>
-            <id>oss-snapshot</id>
-            <name>oss-snapshot</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
-            <id>clojars.org</id>
-            <url>http://clojars.org/repo</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>oss-snapshot</id>
-            <name>oss-snapshot</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        </pluginRepository>
-    </pluginRepositories>
 </project>

@@ -32,7 +32,7 @@ public class JongoProvider {
     protected void configure() {
         String host = configuration.get(MONGOHOST);
         int port = configuration.getInteger(MONGOPORT);
-                logger.info(String.format("host: %s, portport: %s",host,port));
+                logger.info(String.format("host: %s, port: %s",host,port));
         try {
             mongo = new MongoClient(host,port);
         } catch (UnknownHostException e) {
