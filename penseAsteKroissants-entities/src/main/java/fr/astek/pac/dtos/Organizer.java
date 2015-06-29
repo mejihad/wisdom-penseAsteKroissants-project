@@ -11,7 +11,7 @@ public class Organizer {
 
     protected String lastName;
 
-    protected String thumbnailPath;
+    protected String email;
 
     public Organizer() {
     }
@@ -21,13 +21,13 @@ public class Organizer {
      * @param astekianId
      * @param firstName
      * @param lastName
-     * @param thumbnailPath
+     * @param email
      */
-    public Organizer(String astekianId, String firstName, String lastName, String thumbnailPath) {
+    public Organizer(String astekianId, String firstName, String lastName, String email) {
         this.astekianId = astekianId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.thumbnailPath = thumbnailPath;
+        this.email = email;
     }
 
     public String getAstekianId() {
@@ -54,11 +54,11 @@ public class Organizer {
         this.lastName = lastName;
     }
 
-    public String getThumbnailPath() {
-        return thumbnailPath;
+    public String getEmail() {
+        return email;
     }
 
-    public void setThumbnailPath(String thumbnailPath) {
-        this.thumbnailPath = thumbnailPath;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

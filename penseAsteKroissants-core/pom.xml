@@ -82,6 +82,20 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>org.wisdom-framework</groupId>
+            <artifactId>wisdom-mailer</artifactId>
+            <!-- Use latest version here -->
+            <version>0.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <version>2.1.4.RELEASE</version>
+        </dependency>
+
+
         <!--dependency>
             <groupId>org.apache.servicemix.bundles</groupId>
             <artifactId>org.apache.servicemix.bundles.quartz</artifactId>

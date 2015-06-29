@@ -11,7 +11,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <pak.wisdom.version>0.9.0</pak.wisdom.version>
+        <pak.wisdom.version>0.9.1</pak.wisdom.version>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.testSource>1.8</maven.compiler.testSource>

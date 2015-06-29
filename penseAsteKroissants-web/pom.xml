@@ -72,6 +72,19 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
+        <!-- Mail service -->
+        <dependency>
+            <groupId>org.wisdom-framework</groupId>
+            <artifactId>thymeleaf-template-engine</artifactId>
+            <version>${pak.wisdom.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wisdom-framework</groupId>
+            <artifactId>wisdom-mailer</artifactId>
+            <!-- Use latest version here -->
+            <version>0.5</version>
+        </dependency>
+
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.wisdom-framework</groupId>

@@ -20,6 +20,8 @@ public class Event extends UpcomingEvent{
 
     protected boolean isActive;
 
+    protected boolean toRemind;
+
     public Event() {
     }
 
@@ -43,6 +45,14 @@ public class Event extends UpcomingEvent{
 
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public boolean isToRemind() {
+        return toRemind;
+    }
+
+    public void setToRemind(boolean toRemind) {
+        this.toRemind = toRemind;
     }
 
     public String getDateStr() {

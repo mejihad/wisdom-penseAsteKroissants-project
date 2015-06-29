@@ -16,15 +16,15 @@ import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.wisdom.api.annotations.View;
 import org.wisdom.api.configuration.ApplicationConfiguration;
+import org.wisdom.api.templates.Template;
 
 import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Created by jmejdoub on 07/04/2015.
@@ -36,16 +36,26 @@ public class EventsManager {
 
     final static Logger logger = LoggerFactory.getLogger(EventsManager.class);
 
+    @View("mail/email")
+    Template email;
+
     @Requires
     JongoProvider jongoProvider;
 
     @Requires
     ApplicationConfiguration configuration;
 
+    @Requires
+    MailService mailer;
+
     private static final String UPCOMING_EVTS_SIZE = "upcoming.events.size";
 
+    private static final String UPCOMING_EVTS_MAIL_SUBJECT = "mail.pak.subject";
+
+    private static final String EVT_TO_REMIND_MAIL_SUBJECT = "mail.pak.reminder.subject";
+
     @Validate
-    protected void configure() {
+    protected void configure() throws Exception {
         int upEvtSize = configuration.getInteger(UPCOMING_EVTS_SIZE);
 
         Jongo jongo = jongoProvider.getJongo();
@@ -72,7 +82,7 @@ public class EventsManager {
         createEvent();
     }
 
-    public void initUpcomingEvents(Jongo jongo, int upEvtSize) {
+    public void initUpcomingEvents(Jongo jongo, int upEvtSize) throws Exception {
         logger.info("Start upcoming events initialization.");
         BasicDBObject options = new BasicDBObject("capped", true);
         options.append("size", 4096);
@@ -104,22 +114,28 @@ public class EventsManager {
         }
     }
 
-    public void createEvent() {
-        logger.info("Start Event creation.");
+    public void createEvent() throws Exception {
         Jongo jongo = jongoProvider.getJongo();
         MongoCollection events = jongo.getCollection("events");
         Event currentEvent = events.findOne("{isActive:#}", true).as(Event.class);
         Event event = new Event();
         LocalDate nextFriday = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
         if(currentEvent == null || !currentEvent.getDate().equals(nextFriday)){
+            logger.info("Start Event creation.");
             MongoCollection upcomingEvents = jongo.getCollection("upcomingEvents");
             //First upcoming event (natural sort)
             UpcomingEvent upcomingEvt = upcomingEvents.findOne().as(UpcomingEvent.class);
-            event.setOrganizer(upcomingEvt.getOrganizer());
+            final Organizer organizer = upcomingEvt.getOrganizer();
+            event.setOrganizer(organizer);
             event.setIsActive(true);
+            event.setToRemind(true);
             LocalDate date = LocalDate.now();
             event.setDate(date.with(TemporalAdjusters.next(DayOfWeek.FRIDAY)));
             events.save(event);
+            Map<String, Object> params = new HashMap();
+            params.put("astekian", organizer);
+            String email = configuration.isDev() ? "mejihad@gmail.com" : organizer.getEmail();
+            mailer.sendMail(this.email, params, email, configuration.get(UPCOMING_EVTS_MAIL_SUBJECT));
             if (currentEvent != null) {
                 currentEvent.setIsActive(false);
                 events.save(currentEvent);
@@ -138,9 +154,24 @@ public class EventsManager {
         }
     }
 
-    private void createUpcomingEvent(MongoCollection upcomingEvents, Astekian organizer) {
+    public void remindEvent() throws Exception {
+        Jongo jongo = jongoProvider.getJongo();
+        MongoCollection events = jongo.getCollection("events");
+        Event eventToRemind = events.findOne("{toRemind:#}", true).as(Event.class);
+        if(eventToRemind == null){
+            return;
+        }
+        Map<String, Object> params = new HashMap();
+        params.put("astekian", eventToRemind.getOrganizer());
+
+        mailer.sendMail(email, params, eventToRemind.getOrganizer().getEmail(), configuration.get(EVT_TO_REMIND_MAIL_SUBJECT));
+        eventToRemind.setToRemind(false);
+        events.save(eventToRemind);
+    }
+
+    private void createUpcomingEvent(MongoCollection upcomingEvents, Astekian organizer) throws Exception {
         UpcomingEvent upcomingEvent = new UpcomingEvent();
-        Organizer org = new Organizer(organizer.getId(),organizer.getFirstName(),organizer.getLastName(),null);
+        Organizer org = new Organizer(organizer.getId(),organizer.getFirstName(),organizer.getLastName(),organizer.getEmail());
         upcomingEvent.setOrganizer(org);
         upcomingEvents.save(upcomingEvent);
     }
